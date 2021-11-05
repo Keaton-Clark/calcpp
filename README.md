@@ -1,1 +1,1 @@
-# calcpp
+Simple and lightweight Curses calculator
