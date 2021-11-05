@@ -48,13 +48,9 @@ std::string IWIN::stringInput()
 		{
 			ch = getch();
 			if (ch == 126)
-			{
 				wdelch(inputWindow);
-			}
 			else
-			{
 				ch = getch();
-			}
 			switch (ch)
 			{
 			case 65:
@@ -77,7 +73,7 @@ std::string IWIN::stringInput()
 			inputString.insert(x, 1, ch);
 			wmove(inputWindow, y, ++x);
 		}
-		else if (ch == 127)
+		else if (ch == 127 && x != 0)
 		{
 			mvwdelch(inputWindow, y, x - 1);
 			inputString.erase(x-1, 1);

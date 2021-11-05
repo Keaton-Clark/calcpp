@@ -30,7 +30,7 @@ int calc::parse()
 				i++;
 			}
 			index++;
-		} else if (st[i] == ')' || st[i] == ')' || st[i] == '+' || st[i] == '*' || st[i] == '/') {
+		} else if (st[i] == '(' || st[i] == ')' || st[i] == '+' || st[i] == '*' || st[i] == '/') {
 			parsed.push_back("");
 			parsed[index] += st[i];
 			index++;
@@ -43,7 +43,12 @@ int calc::parse()
 			an = std::string("Variables and functions are only lowercase");
 			return 1;
 		} else if (st[i] == '-') {
-		
+      parsed.push_back("");
+      parsed[index] += st[i];
+      if (i != 0)
+        if (!(st[i-1] == '(' || st[i-1] == ')' || st[i-1] == '+' || st[i-1] == '*' || st[i-1] == '/' || st[i-1] == '-'))
+            index++;
+      i++;
 		} else {
 			an = std::string("Cannot find operator: ") += st[i];
 			return 1;
