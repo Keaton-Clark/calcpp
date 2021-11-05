@@ -1,3 +1,2 @@
 calcpp
-
-src/*.o
+*.o
