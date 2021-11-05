@@ -1,4 +1,0 @@
-inits moved to class aka header gets its own class. initializing the object initializes the window.
-for header have a method that updates time and battery, a main that prints the string and keeps track of its location ...
-input has own vector main has own vector
-class.update allows us to swap screens to say a function or notes screen
