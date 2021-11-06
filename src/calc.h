@@ -14,9 +14,9 @@ private:
 	std::vector<std::string> parsed;
 	int parse();
 	std::string solve(int, int);
-        vars variables;
+        vars * variables;
 public:
-	calc(std::string);
+	calc(std::string, vars * variables);
 	std::string getst() const;
 	std::string getan() const;
 };

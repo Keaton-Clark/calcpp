@@ -20,5 +20,10 @@ std::string vars::searchVars(std::string search) {
                 if (names[x] == search)
                         return values[x];
         }
-        return "0";
+        return "nil";
+}
+
+void vars::setValue(std::string name, std::string value) {
+        names.push_back(name);
+        values.push_back(value);
 }

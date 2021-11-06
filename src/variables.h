@@ -14,6 +14,7 @@ private:
 public:
         vars();
         std::string searchVars(std::string);
+        void setValue(std::string, std::string);
 };
 
 #endif

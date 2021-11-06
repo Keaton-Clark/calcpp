@@ -2,12 +2,13 @@
 #include <vector>
 #include "window.h"
 
-calc::calc(std::string st) : st(st)
+calc::calc(std::string st, vars * variables) : st(st), variables(variables)
 {
         if (st == "quit")
 		throw std::string("Calc++ Terminated");
 	if (parse() == 0)
 		an = solve(0, parsed.size());
+        //variables.setValue("hello", "77");
 }
 
 int calc::parse()
@@ -15,6 +16,7 @@ int calc::parse()
 	parsed.reserve(st.length());
 	int index = 0;
 	int i = 0;
+        std::string tmp;
 	while (i < st.length()) {
 		if (st[i] >= '0' && st[i] <= '9' || st[i] == '.') {
 			parsed.push_back("");
@@ -29,9 +31,18 @@ int calc::parse()
 				parsed[index] += st[i];
 			 	i++;
 			}
-                        parsed[index] = variables.searchVars(parsed[index]);
-			index++;
-		} else if (st[i] == '(' || st[i] == ')' || st[i] == '+' || st[i] == '*' || st[i] == '/') {
+                        tmp = variables->searchVars(parsed[index]);
+                        if (tmp == "nil" && parsed[index - 1] != "=") {
+                                an = parsed[index] += std::string(" : variable not found");
+                                return 1;
+                        } else if (tmp == "nil" && parsed[index - 1] == "=") {
+                                variables->setValue(parsed[index], solve(0, index));
+                                an = parsed[index] += std::string(" set to ") += solve(0, index);
+                                return 1;
+                        }
+                        parsed[index] = tmp;
+                        index++;
+		} else if (st[i] == '(' || st[i] == ')' || st[i] == '+' || st[i] == '*' || st[i] == '/' || st[i] == '=') {
 			parsed.push_back("");
 			parsed[index] += st[i];
 			index++;
@@ -43,13 +54,13 @@ int calc::parse()
 		} else if (st[i] >= 'A' && st[i] <= 'Z') {
 			an = std::string("Variables and functions are only lowercase");
 			return 1;
-		} else if (st[i] == '-') {
-      parsed.push_back("");
-      parsed[index] += st[i];
-      if (i != 0)
-        if (!(st[i-1] == '(' || st[i-1] == ')' || st[i-1] == '+' || st[i-1] == '*' || st[i-1] == '/' || st[i-1] == '-'))
-            index++;
-      i++;
+                } else if (st[i] == '-') {
+                        parsed.push_back("");
+                        parsed[index] += st[i];
+                        if (i != 0)
+                                if (!(st[i-1] == '(' || st[i-1] == ')' || st[i-1] == '+' || st[i-1] == '*' || st[i-1] == '/' || st[i-1] == '-'))
+                                        index++;
+                                        i++;
 		} else {
 			an = std::string("Cannot find operator: ") += st[i];
 			return 1;

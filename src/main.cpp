@@ -2,6 +2,7 @@
 #include "calc.h"
 #include <iostream>
 #include <string>
+#include "variables.h"
 
 int main()
 {
@@ -12,10 +13,11 @@ int main()
 		MWIN mainWindow;
 		HWIN headerWindow;
 		IWIN inputWindow;
+                vars variables;
 		std::string input;
 		do {
 			input = inputWindow.stringInput();
-			calc calc1(input);
+			calc calc1(input, &variables);
 			mainWindow.print(calc1);
 			headerWindow.update();
 		} while (true);
