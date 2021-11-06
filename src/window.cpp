@@ -1,5 +1,5 @@
 #include "window.h"
-#include "config.h"
+#include "../config/config.h"
 #include <fstream>
 
 MWIN::MWIN()

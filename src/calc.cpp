@@ -4,7 +4,7 @@
 
 calc::calc(std::string st) : st(st)
 {
-	if (st == "quit")
+        if (st == "quit")
 		throw std::string("Calc++ Terminated");
 	if (parse() == 0)
 		an = solve(0, parsed.size());
@@ -27,8 +27,9 @@ int calc::parse()
 			parsed.push_back("");
 			while (i < st.length() && st[i] >= 'a' && st[i] <= 'z') {
 				parsed[index] += st[i];
-				i++;
+			 	i++;
 			}
+                        parsed[index] = variables.searchVars(parsed[index]);
 			index++;
 		} else if (st[i] == '(' || st[i] == ')' || st[i] == '+' || st[i] == '*' || st[i] == '/') {
 			parsed.push_back("");
@@ -119,6 +120,4 @@ std::string calc::getan() const
 	return an;
 }
 
-var::var(std::string name, std::string value) : name(name), value(value){}
 
-/*std::string var::getVal*/

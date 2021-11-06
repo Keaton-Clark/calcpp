@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "variables.h"
 
 class calc
 {
@@ -13,24 +14,12 @@ private:
 	std::vector<std::string> parsed;
 	int parse();
 	std::string solve(int, int);
-
+        vars variables;
 public:
 	calc(std::string);
 	std::string getst() const;
 	std::string getan() const;
 };
-
-class var
-{
-private:
-	std::string name;
-	std::string value;
-public:
-	var(std::string, std::string);
-	std::string getVal();
-	std::string setVal();
-};
-
 
 
 #endif
